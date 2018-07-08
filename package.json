@@ -1,0 +1,19 @@
+{
+  "name": "finite",
+  "license": "MIT",
+  "version": "0.1",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "global": "^4.3.2",
+    "lit-html": "^0.10.2",
+    "parcel": "^1.9.4"
+  },
+  "scripts": {
+    "dev": "parcel watch src/index.js --out-file finite.js",
+    "build": "parcel build src/index.js --out-file finite.js"
+  }
+}
