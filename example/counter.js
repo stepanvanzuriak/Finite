@@ -18,6 +18,6 @@ const Counter = Finite.State({
     html`<button on-click=${() =>
       decrement(count)}>-1</button><div>${count}</div><button on-click=${() =>
       increment(count)}>+1</button>`
-})
+});
 
-Finite.Render(Counter, document.body)
+Finite.Render(Counter, document.body);

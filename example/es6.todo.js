@@ -1,4 +1,4 @@
-import Finite, { html } from '../dist/finite'
+import Finite, { html } from '../dist/finite';
 
 const view = (
   { list, inputValue },
@@ -11,9 +11,9 @@ const view = (
       html`<p>${element}  <button on-click=${() =>
         removeValue(list, index)}>X</button></p>`
   )}
-  `
+  `;
 
-const ToDO = Finite.State({
+const ToDo = Finite.State({
   name: 'todo',
   memory: {
     list: [],
@@ -40,6 +40,6 @@ const ToDO = Finite.State({
       list: list.filter((_, i) => i !== index)
     }),
   view
-})
+});
 
-Finite.Render(ToDO, document.body)
+Finite.Render(ToDo, document.body);

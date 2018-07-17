@@ -4,7 +4,9 @@ Finite-state machine inspired micro framework
 
 ## How to try ?
 
-Just run `$ yarn run build (or npm run build)` and copy `finite.js` from `dist` folder to your project.
+1.  Run `$ yarn install (or npm install)`
+2.  Run `$ yarn run build (or npm run build)`
+3.  Copy `finite.js` from `dist` folder to your project
 
 ##### P.S. Publish to NPM in TODO
 
@@ -32,16 +34,16 @@ const Counter = Finite.State({
       <button on-click=${() => decrement(count)}>-1</button>
       <div>${count}</div>
       <button on-click=${() => increment(count)}>+1</button>`
-})
+});
 
-Finite.Render(Counter, document.body)
+Finite.Render(Counter, document.body);
 ```
 
 ##### More examples in `example` folder
 
 ## TODO
 
-- [ ] Add jsdoc
+- [x] Add jsdoc
 - [ ] Add tests
 - [ ] Add full API documentation
 - [ ] Publish to npm

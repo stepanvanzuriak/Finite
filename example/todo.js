@@ -9,7 +9,7 @@ const view = (
       html`<p>${element}  <button on-click=${() =>
         removeValue(list, index)}>X</button></p>`
   )}
-  `
+  `;
 
 const ToDO = Finite.State({
   name: 'todo',
@@ -38,6 +38,6 @@ const ToDO = Finite.State({
       list: list.filter((_, i) => i !== index)
     }),
   view
-})
+});
 
-Finite.Render(ToDO, document.body)
+Finite.Render(ToDO, document.body);
