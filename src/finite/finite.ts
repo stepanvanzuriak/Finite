@@ -79,4 +79,8 @@ export class Finite {
 
     render(state.view({ ...state.memory, ...state.rest }), point);
   }
+
+  static T(name: string, to: string) {
+    return { name, to };
+  }
 }

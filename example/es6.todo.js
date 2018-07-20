@@ -17,9 +17,9 @@ const ToDo = Finite.State({
     inputValue: ''
   },
   transitions: [
-    { name: 'ADD_TODO', to: 'todo' },
-    { name: 'CHANGE_INPUT_VALUE', to: 'todo' },
-    { name: 'REMOVE_VALUE', to: 'todo' }
+    Finite.T('ADD_TODO', 'todo'),
+    Finite.T('CHANGE_INPUT_VALUE', 'todo'),
+    Finite.T('REMOVE_VALUE', 'todo')
   ],
   onChange: e =>
     Finite.Transition('todo', 'CHANGE_INPUT_VALUE', {
