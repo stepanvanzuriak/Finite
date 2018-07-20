@@ -1,4 +1,4 @@
-const view = ({ list, inputValue }, { onChange, addValue, removeValue }) => h`
+const view = ({ list, inputValue, onChange, addValue, removeValue }) => h`
   <input on-change=${onChange} value=${inputValue} type="text"/>
   <button on-click=${() => addValue(list, inputValue)}>Add</button>
   ${list.map(

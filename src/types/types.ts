@@ -1,6 +1,7 @@
 import { TemplateResult } from '../../node_modules/lit-html';
 
-export type ViewFunction = (memory: object, methods?: any) => TemplateResult;
+// Props is memory and methods
+export type ViewFunction = (props: object) => TemplateResult;
 export type Transition = { name: string; to: string };
 
 export type StateType = {

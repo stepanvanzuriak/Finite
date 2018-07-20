@@ -9,6 +9,7 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "global": "^4.3.2",
+    "jest": "^23.4.1",
     "lit-html": "^0.10.2",
     "parcel": "^1.9.4"
   },

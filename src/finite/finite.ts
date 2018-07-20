@@ -34,7 +34,6 @@ export class Finite {
    * @param memory Extra memory to send
    */
   static Transition(from: string, name: string, memory = {}) {
-    //console.log('this');
     const state = _machine.find(from);
 
     const nextStateName = state.transitions.find(
@@ -44,6 +43,7 @@ export class Finite {
 
     console.log(
       'TRANSITION',
+      name,
       `${from} -> ${nextStateName}`,
       `${JSON.stringify(state.memory)} -> ${JSON.stringify({
         ...nextState.memory,
@@ -54,7 +54,7 @@ export class Finite {
     nextState.memory = { ...nextState.memory, ...state.memory, ...memory };
 
     render(
-      nextState.view(nextState.memory, nextState.rest),
+      nextState.view({ ...nextState.memory, ...nextState.rest }),
       _machine.getMountPoint()
     );
   }
@@ -69,6 +69,6 @@ export class Finite {
 
     console.log('INIT_STATE', state.name, JSON.stringify(state.memory));
 
-    render(state.view(state.memory, state.rest), point);
+    render(state.view({ ...state.memory, ...state.rest }), point);
   }
 }
