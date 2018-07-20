@@ -11,6 +11,7 @@ export class Machine {
 
   constructor() {
     this.states = [];
+    this.point = null;
   }
 
   /**

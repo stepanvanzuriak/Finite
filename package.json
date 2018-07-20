@@ -13,7 +13,7 @@
     "parcel": "^1.9.4"
   },
   "scripts": {
-    "dev": "parcel watch src/index.js --out-file finite.js",
-    "build": "parcel build src/index.js --out-file finite.js"
+    "dev": "parcel watch src/index.ts --out-file finite.js",
+    "build": "parcel build src/index.ts --out-file finite.js"
   }
 }

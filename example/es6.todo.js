@@ -1,14 +1,11 @@
-import Finite, { html } from '../dist/finite';
+import Finite, { h } from '../dist/finite';
 
-const view = (
-  { list, inputValue },
-  { onChange, addValue, removeValue }
-) => html`
+const view = ({ list, inputValue }, { onChange, addValue, removeValue }) => h`
   <input on-change=${onChange} value=${inputValue} type="text"/>
   <button on-click=${() => addValue(list, inputValue)}>Add</button>
   ${list.map(
     (element, index) =>
-      html`<p>${element}  <button on-click=${() =>
+      h`<p>${element}  <button on-click=${() =>
         removeValue(list, index)}>X</button></p>`
   )}
   `;

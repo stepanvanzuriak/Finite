@@ -1,4 +1,4 @@
-import { render, html } from 'lit-html';
+import { render } from 'lit-html';
 
 import { StateType } from '../types/types';
 import { State } from '../state/state';
@@ -30,14 +30,15 @@ export class Finite {
   /**
    * Transit state
    * @param from Name of state
-   * @param to Name of new state
+   * @param to Name of transition
    * @param memory Extra memory to send
    */
-  static Transition(from: string, to: string, memory = {}) {
+  static Transition(from: string, name: string, memory = {}) {
+    //console.log('this');
     const state = _machine.find(from);
 
     const nextStateName = state.transitions.find(
-      transition => transition.name === to
+      transition => transition.name === name
     ).to;
     const nextState = _machine.find(nextStateName);
 

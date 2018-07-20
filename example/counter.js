@@ -15,7 +15,7 @@ const Counter = Finite.State({
   decrement: count =>
     Finite.Transition('counter', 'DECREMENT', { count: count - 1 }),
   view: ({ count }, { increment, decrement }) =>
-    html`<button on-click=${() =>
+    h`<button on-click=${() =>
       decrement(count)}>-1</button><div>${count}</div><button on-click=${() =>
       increment(count)}>+1</button>`
 });
