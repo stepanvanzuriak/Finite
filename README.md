@@ -16,6 +16,7 @@ Finite-state machine inspired micro framework
 const Counter = Finite.State({
   name: 'counter',
   transitions: [
+    // Same as {name:  'INCREMENT', to: 'counter'}
     Finite.T('INCREMENT', 'counter'),
     Finite.T('DECREMENT', 'counter')
   ],
