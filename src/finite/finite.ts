@@ -42,14 +42,17 @@ export class Finite {
     const nextState = _machine.find(nextStateName);
 
     console.log(
-      'TRANSITION',
+      '%cTRANSITION',
+      'color: green; font-weight: bold',
       name,
       `${from} -> ${nextStateName}`,
-      `${JSON.stringify(state.memory)} -> ${JSON.stringify({
+      state.memory,
+      '-> ',
+      {
         ...nextState.memory,
         ...state.memory,
         ...memory
-      })}`
+      }
     );
     nextState.memory = { ...nextState.memory, ...state.memory, ...memory };
 
@@ -67,7 +70,12 @@ export class Finite {
   static Render(state: State, point: HTMLElement) {
     _machine.setMountPoint(point);
 
-    console.log('INIT_STATE', state.name, JSON.stringify(state.memory));
+    console.log(
+      '%cINIT_STATE',
+      'color: blue; font-weight: bold',
+      state.name,
+      state.memory
+    );
 
     render(state.view({ ...state.memory, ...state.rest }), point);
   }
