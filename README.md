@@ -4,8 +4,8 @@ Finite-state machine inspired micro framework
 
 ## How to try ?
 
-1.  Run `$ yarn install (or npm install)`
-2.  Run `$ yarn run build (or npm run build)`
+1.  `$ yarn install (or npm install)`
+2.  `$ yarn run build (or npm run build)`
 3.  Copy `finite.js` from `dist` folder to your project
 
 ##### P.S. Publish to NPM in TODO
