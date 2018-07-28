@@ -39,7 +39,7 @@ Finite.Render(Counter, document.body);
 
 ## Simple two state example
 
-````javascript
+```javascript
 const A = Finite.State({
   name: 'A',
   memory: {
@@ -62,7 +62,6 @@ const B = Finite.State({
 });
 
 Finite.Render(A, document.body);
-
 ```
 
 ##### More examples in `example` folder
