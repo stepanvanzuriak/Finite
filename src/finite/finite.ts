@@ -31,9 +31,9 @@ export class Finite {
    * Transit state
    * @param from Name of state
    * @param to Name of transition
-   * @param memory Extra memory to send
+   * @param payload Extra memory to send
    */
-  static Transition(from: string, name: string, memory = {}) {
+  static Transition(from: string, name: string, payload = {}) {
     const state = _machine.find(from);
 
     const nextStateName = state.transitions.find(
@@ -50,11 +50,10 @@ export class Finite {
       '-> ',
       {
         ...nextState.memory,
-        ...state.memory,
-        ...memory
+        ...payload
       }
     );
-    nextState.memory = { ...nextState.memory, ...state.memory, ...memory };
+    nextState.memory = { ...nextState.memory, ...payload };
 
     render(
       nextState.view({ ...nextState.memory, ...nextState.rest }),
