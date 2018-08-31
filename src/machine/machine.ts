@@ -1,4 +1,4 @@
-import { State } from '../state/State';
+import { State } from "../state/State";
 
 /**
  * Class to save states and mount point
@@ -9,9 +9,14 @@ export class Machine {
   // Main mount point
   point: HTMLElement;
 
+  __pointer: State;
+
   constructor() {
     this.states = [];
     this.point = null;
+
+    // ! TEST ZONE
+    this.__pointer = null;
   }
 
   /**

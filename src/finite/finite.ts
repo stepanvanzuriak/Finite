@@ -1,13 +1,14 @@
-import { render } from 'lit-html';
+import { render } from "lit-html";
 
-import { StateType } from '../types/types';
-import { State } from '../state/state';
-import { Machine } from '../machine/machine';
+import { StateType } from "../types/types";
+import { State } from "../state/state";
+import { Machine } from "../machine/machine";
 
 const _machine = new Machine();
 console.log(
-  '🚧 Right now console output only way to debug this, so every Transition is logged'
+  "🚧 Right now console output only way to debug this, so every Transition is logged 🚧"
 );
+console.log("");
 /**
  * Main framework object
  */
@@ -41,18 +42,42 @@ export class Finite {
     ).to;
     const nextState = _machine.find(nextStateName);
 
+    // ! TEST ZONE
+    _machine.__pointer = nextState;
+
     console.log(
-      '%cTRANSITION',
-      'color: green; font-weight: bold',
+      "%cTRANSITION",
+      "color: green; font-weight: bold",
       name,
       `${from} -> ${nextStateName}`,
       state.memory,
-      '-> ',
+      "-> ",
       {
         ...nextState.memory,
         ...payload
       }
     );
+    nextState.memory = { ...nextState.memory, ...payload };
+
+    render(
+      nextState.view({ ...nextState.memory, ...nextState.rest }),
+      _machine.getMountPoint()
+    );
+  }
+
+  // NOT FINISHED
+  // Concept of Transition without from for nameless (anonymous) states
+  static __TransitionNameless(name: string, payload = {}) {
+    console.log(`__TransitionNameless ${name} ${payload}`);
+
+    const state = _machine.__pointer;
+    const nextStateName = state.transitions.find(
+      transition => transition.name === name
+    ).to;
+    const nextState = _machine.find(nextStateName);
+
+    console.log(nextState);
+
     nextState.memory = { ...nextState.memory, ...payload };
 
     render(
@@ -69,10 +94,13 @@ export class Finite {
   static Render(state: State, point: HTMLElement) {
     _machine.setMountPoint(point);
 
+    // ! TEST ZONE
+    _machine.__pointer = state;
+
     console.log(
-      '%cINIT_STATE',
-      'color: blue; font-weight: bold',
-      state.name,
+      "%cINIT_STATE",
+      "color: blue; font-weight: bold",
+      state.name || "Anonymous",
       state.memory
     );
 
