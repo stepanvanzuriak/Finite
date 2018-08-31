@@ -6,7 +6,7 @@ import { Machine } from '../machine/machine';
 
 const _machine = new Machine();
 console.log(
-  '🚧 Right now console output only way to debug this is, so every Transition is logged'
+  '🚧 Right now console output only way to debug this, so every Transition is logged'
 );
 /**
  * Main framework object
