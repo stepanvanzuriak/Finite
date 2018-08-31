@@ -15,6 +15,7 @@
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",
-    "build": "parcel build src/index.ts --out-file finite.js"
+    "build": "parcel build src/index.ts --out-file finite.js",
+    "example:playground": "parcel serve example/index.html"
   }
 }
