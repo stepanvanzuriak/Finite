@@ -1,5 +1,3 @@
-# ⬜ Finite
-
 <p align="center">
   <img src="./assets/code.png" width="80%"/>
 </p>
