@@ -1,13 +1,13 @@
-import { State } from "../state/State";
+import { State } from "../state/state";
 
 /**
  * Class to save states and mount point
  */
 export class Machine {
   // Array of states
-  states: State[];
+  public states: State[];
   // Main mount point
-  point: HTMLElement;
+  public point: HTMLElement;
 
   __pointer: State;
 
@@ -23,7 +23,7 @@ export class Machine {
    * Add state to Machine
    * @param state Instance of State
    */
-  add(state: State) {
+  public add(state: State) {
     this.states.push(state);
   }
 
@@ -31,7 +31,7 @@ export class Machine {
    * Search state by name
    * @param name Name
    */
-  find(name: string) {
+  public find(name: string) {
     return this.states.find(state => state.name === name);
   }
 
@@ -39,7 +39,7 @@ export class Machine {
    * Set main mount point for app
    * @param point HTMLElement mount point
    */
-  setMountPoint(point: HTMLElement) {
+  public setMountPoint(point: HTMLElement) {
     this.point = point;
   }
 
@@ -47,7 +47,7 @@ export class Machine {
    * Returns main mount point
    * @returns Main mount point
    */
-  getMountPoint(): HTMLElement {
+  public getMountPoint(): HTMLElement {
     return this.point;
   }
 }

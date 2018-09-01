@@ -1,10 +1,11 @@
 import { render } from "lit-html";
 
-import { StateType } from "../types/types";
-import { State } from "../state/state";
 import { Machine } from "../machine/machine";
+import { State } from "../state/state";
+import { IStateType } from "../types/types";
 
-const _machine = new Machine();
+const machine = new Machine();
+
 console.log(
   "🚧 Right now console output only way to debug this, so every Transition is logged 🚧"
 );
@@ -22,9 +23,15 @@ export class Finite {
    * @param state.transitions Representation of state transitions
    * @returns New state
    */
-  static State({ name, view, memory, transitions, ...rest }: StateType): State {
+  public static State({
+    name,
+    view,
+    memory,
+    transitions,
+    ...rest
+  }: IStateType): State {
     const state = new State({ name, view, memory, transitions, ...rest });
-    _machine.add(state);
+    machine.add(state);
 
     return state;
   }
@@ -34,16 +41,16 @@ export class Finite {
    * @param to Name of transition
    * @param payload Extra memory to send
    */
-  static Transition(from: string, name: string, payload = {}) {
-    const state = _machine.find(from);
+  public static Transition(from: string, name: string, payload = {}) {
+    const state = machine.find(from);
 
     const nextStateName = state.transitions.find(
       transition => transition.name === name
     ).to;
-    const nextState = _machine.find(nextStateName);
+    const nextState = machine.find(nextStateName);
 
     // ! TEST ZONE
-    _machine.__pointer = nextState;
+    machine.__pointer = nextState;
 
     console.log(
       "%cTRANSITION",
@@ -61,20 +68,20 @@ export class Finite {
 
     render(
       nextState.view({ ...nextState.memory, ...nextState.rest }),
-      _machine.getMountPoint()
+      machine.getMountPoint()
     );
   }
 
   // NOT FINISHED
   // Concept of Transition without from for nameless (anonymous) states
-  static __TransitionNameless(name: string, payload = {}) {
+  public static __TransitionNameless(name: string, payload = {}) {
     console.log(`__TransitionNameless ${name} ${payload}`);
 
-    const state = _machine.__pointer;
+    const state = machine.__pointer;
     const nextStateName = state.transitions.find(
       transition => transition.name === name
     ).to;
-    const nextState = _machine.find(nextStateName);
+    const nextState = machine.find(nextStateName);
 
     console.log(nextState);
 
@@ -82,7 +89,7 @@ export class Finite {
 
     render(
       nextState.view({ ...nextState.memory, ...nextState.rest }),
-      _machine.getMountPoint()
+      machine.getMountPoint()
     );
   }
 
@@ -91,11 +98,11 @@ export class Finite {
    * @param state State to render
    * @param point HTMLElement mount point
    */
-  static Render(state: State, point: HTMLElement) {
-    _machine.setMountPoint(point);
+  public static Render(state: State, point: HTMLElement) {
+    machine.setMountPoint(point);
 
     // ! TEST ZONE
-    _machine.__pointer = state;
+    machine.__pointer = state;
 
     console.log(
       "%cINIT_STATE",
@@ -107,7 +114,7 @@ export class Finite {
     render(state.view({ ...state.memory, ...state.rest }), point);
   }
 
-  static T(name: string, to: string) {
+  public static T(name: string, to: string) {
     return { name, to };
   }
 }

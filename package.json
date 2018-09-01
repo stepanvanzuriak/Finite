@@ -4,6 +4,7 @@
   "version": "0.1",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "tslint-config-prettier": "^1.15.0",
     "typescript": "^2.9.2"
   },
   "dependencies": {

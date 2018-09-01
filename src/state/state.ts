@@ -1,11 +1,11 @@
-import { ViewFunction, StateType, Transition } from '../types/types';
+import { IStateType, ITransition, ViewFunction } from "../types/types";
 
 export class State {
-  name: string;
-  memory: object;
-  view: ViewFunction;
-  transitions: Transition[];
-  rest: object;
+  public name: string;
+  public memory: object;
+  public view: ViewFunction;
+  public transitions: ITransition[];
+  public rest: object;
 
   constructor({
     name,
@@ -13,7 +13,7 @@ export class State {
     memory = {},
     transitions = [],
     ...rest
-  }: StateType) {
+  }: IStateType) {
     this.name = name;
     this.view = view;
     this.memory = memory;

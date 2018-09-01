@@ -1,5 +1,5 @@
-import { Finite } from "./finite/finite";
 import { html } from "lit-html/lib/lit-extended";
+import { Finite } from "./finite/finite";
 
 window.h = html;
 window.Finite = Finite;
