@@ -1,4 +1,4 @@
-import Finite, { h } from '../dist/finite';
+import Finite, { State, Transition, T, h } from "../dist/finite";
 
 const view = ({ list, inputValue, onChange, addValue, removeValue }) => h`
   <input on-change=${onChange} value=${inputValue} type="text"/>
@@ -10,30 +10,30 @@ const view = ({ list, inputValue, onChange, addValue, removeValue }) => h`
   )}
   `;
 
-const ToDo = Finite.State({
-  name: 'todo',
+const ToDo = State({
+  name: "todo",
   memory: {
     list: [],
-    inputValue: ''
+    inputValue: ""
   },
   transitions: [
-    Finite.T('ADD_TODO', 'todo'),
-    Finite.T('CHANGE_INPUT_VALUE', 'todo'),
-    Finite.T('REMOVE_VALUE', 'todo')
+    T("ADD_TODO", "todo"),
+    T("CHANGE_INPUT_VALUE", "todo"),
+    T("REMOVE_VALUE", "todo")
   ],
   onChange: e =>
-    Finite.Transition('todo', 'CHANGE_INPUT_VALUE', {
+    Transition("CHANGE_INPUT_VALUE", {
       inputValue: e.target.value
     }),
   addValue: (list, value) =>
     value.length > 0
-      ? Finite.Transition('todo', 'ADD_TODO', {
-          inputValue: '',
+      ? Transition("ADD_TODO", {
+          inputValue: "",
           list: [value, ...list]
         })
       : null,
   removeValue: (list, index) =>
-    Finite.Transition('todo', 'REMOVE_VALUE', {
+    Transition("REMOVE_VALUE", {
       list: list.filter((_, i) => i !== index)
     }),
   view
