@@ -35,28 +35,25 @@ export class Finite {
 
     return state;
   }
+
   /**
    * Transit state
-   * @param from Name of state
-   * @param to Name of transition
+   * @param name Name of transiton
    * @param payload Extra memory to send
    */
-  public static Transition(from: string, name: string, payload = {}) {
-    const state = machine.find(from);
-
+  public static Transition(name: string, payload = {}) {
+    const state = machine.__pointer;
+    console.log(state);
     const nextStateName = state.transitions.find(
       transition => transition.name === name
     ).to;
     const nextState = machine.find(nextStateName);
 
-    // ! TEST ZONE
-    machine.__pointer = nextState;
-
     console.log(
       "%cTRANSITION",
       "color: green; font-weight: bold",
       name,
-      `${from} -> ${nextStateName}`,
+      `${state.name} -> ${nextStateName}`,
       state.memory,
       "-> ",
       {
@@ -64,28 +61,10 @@ export class Finite {
         ...payload
       }
     );
-    nextState.memory = { ...nextState.memory, ...payload };
-
-    render(
-      nextState.view({ ...nextState.memory, ...nextState.rest }),
-      machine.getMountPoint()
-    );
-  }
-
-  // NOT FINISHED
-  // Concept of Transition without from for nameless (anonymous) states
-  public static __TransitionNameless(name: string, payload = {}) {
-    console.log(`__TransitionNameless ${name} ${payload}`);
-
-    const state = machine.__pointer;
-    const nextStateName = state.transitions.find(
-      transition => transition.name === name
-    ).to;
-    const nextState = machine.find(nextStateName);
-
-    console.log(nextState);
 
     nextState.memory = { ...nextState.memory, ...payload };
+
+    machine.__pointer = nextState;
 
     render(
       nextState.view({ ...nextState.memory, ...nextState.rest }),
