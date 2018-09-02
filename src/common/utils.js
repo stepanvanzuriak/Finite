@@ -1,1 +1,1 @@
-export const inject = (f, m) => args => f(m, args);
+export const inject = (f, m) => args => f(args, m);

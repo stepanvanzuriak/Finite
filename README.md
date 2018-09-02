@@ -20,15 +20,15 @@ const Counter = Finite.State({
     Finite.T("INCREMENT", "counter"),
     Finite.T("DECREMENT", "counter")
   ],
-  memory: {
-    count: 0
-  },
-  increment: count => Finite.Transition("INCREMENT", { count: count + 1 }),
-  decrement: count => Finite.Transition("DECREMENT", { count: count - 1 }),
+  memory: { count: 0 },
+  increment: (_, { count }) =>
+    Finite.Transition("INCREMENT", { count: count + 1 }),
+  decrement: (_, { count }) =>
+    Finite.Transition("INCREMENT", { count: count - 1 }),
   view: ({ count, increment, decrement }) =>
-    h`<button on-click=${() =>
-      decrement(count)}>-1</button><div>${count}</div><button on-click=${() =>
-      increment(count)}>+1</button>`
+    h`<button on-click=${decrement}>-1</button>
+        <div>${count}</div>
+        <button on-click=${increment}>+1</button>`
 });
 
 Finite.Render(Counter, document.body);
@@ -43,35 +43,23 @@ const A = Finite.State({
     text: "Text A"
   },
   transitions: [Finite.T("MOVE_TO_B", "B")],
+  onClick: e => Finite.Transition("MOVE_TO_B"),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To B</button>`,
-  onClick: e => Finite.Transition("MOVE_TO_B")
+    h`<div>${text}</div><button on-click={${onClick}}>To B</button>`
 });
+
 const B = Finite.State({
   name: "B",
   memory: {
     text: "Text B"
   },
   transitions: [Finite.T("MOVE_TO_A", "A")],
+  onClick: e => Finite.Transition("MOVE_TO_A", { text: "New Text A" }),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To A</button>`,
-  onClick: e => Finite.Transition("MOVE_TO_A", { text: "New Text A" })
+    h`<div>${text}</div><button on-click={${onClick}}>To A</button>`
 });
 
 Finite.Render(A, document.body);
 ```
 
 ##### More examples in `example` folder
-
-## TODO
-
-- [x] Add jsdoc
-- [ ] Add tests
-- [ ] Add full API documentation
-- [ ] Publish to npm
-- [ ] Improve README
-- [ ] Add more examples
-
-```
-
-```
