@@ -1,4 +1,5 @@
-import { IStateType, ITransition, ViewFunction } from "../types/types";
+import { inject } from "../common/utils";
+import { IStateType, ITransition, ViewFunction } from "../types";
 
 export class State {
   public name: string;
@@ -19,5 +20,15 @@ export class State {
     this.memory = memory;
     this.transitions = transitions;
     this.rest = rest;
+  }
+
+  public restWithMemory() {
+    return Object.keys(this.rest).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: inject(this.rest[key], this.memory)
+      }),
+      {}
+    );
   }
 }

@@ -9,14 +9,12 @@ export class Machine {
   // Main mount point
   public point: HTMLElement;
 
-  __pointer: State;
+  public pointer: State;
 
   constructor() {
     this.states = [];
     this.point = null;
-
-    // ! TEST ZONE
-    this.__pointer = null;
+    this.pointer = null;
   }
 
   /**
