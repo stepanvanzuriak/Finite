@@ -63,3 +63,73 @@ Finite.Render(A, document.body);
 ```
 
 ##### More examples in `example` folder
+
+## Api
+
+## Finite Namespace
+
+### Types
+
+`TemplateResult` from ['lit-html'](https://github.com/Polymer/lit-html)
+
+```typescript
+type ViewFunction = (props: object) => TemplateResult;
+
+interface ITransition {
+  name: string;
+  to: string;
+}
+
+interface IStateType {
+  view: ViewFunction;
+  name: string;
+  memory: object;
+  transitions: ITransition[];
+  rest: object;
+}
+```
+
+### State
+
+```typescript
+Finite.State({
+    view,
+    [name],
+    [memory],
+    [transitions],
+    [...rest]
+}: IStateType)
+```
+
+You can use `rest` for own methods like `onChange, onClick` etc.
+
+### Transition
+
+```typescript
+Finite.Transition(
+  name : String,
+  [payload] : Object
+)
+```
+
+Change current state to another, `name` is name from state transitions and `payload` is extra data to send
+
+### Render
+
+```typescript
+Finite.Render(
+  state: State,
+  point: HTMLElement
+)
+```
+
+Set render point and init state for app
+
+### T
+
+```typescript
+Finite.T(
+  name: String,
+  to: String
+) -> {name, to}
+```
