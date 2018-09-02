@@ -1,6 +1,5 @@
-import { TemplateResult } from "../../node_modules/lit-html";
+import { TemplateResult } from "../node_modules/lit-html";
 
-// Props is memory and methods
 export type ViewFunction = (props: object) => TemplateResult;
 
 export interface ITransition {
@@ -14,4 +13,15 @@ export interface IStateType {
   memory: object;
   transitions: ITransition[];
   rest: object;
+}
+
+declare global {
+  interface Window {
+    h: any;
+    Finite: any;
+    State: any;
+    Render: any;
+    Transition: any;
+    T: any;
+  }
 }

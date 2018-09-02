@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-submodule-imports
 import { html } from "lit-html/lib/lit-extended";
 import { Finite } from "./finite/finite";
 
