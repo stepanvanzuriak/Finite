@@ -4,12 +4,23 @@
 
 ## How to try ?
 
-1.  Clone or download project
-2.  `$ yarn install (or npm install)`
-3.  `$ yarn run build (or npm run build)`
-4.  Copy `finite.js` from `dist` folder to your project
+Install finite using your package manager
 
-##### P.S. Publish to NPM in TODO
+```bash
+$ npm install @stepanvanzuriak/finite
+```
+
+And just use!
+
+```javascript
+import Finite, {State, h} from '@stepanvanzuriak/finite'
+
+const JustText = State({
+  view: () => h`<p>Hello!</p>`
+});
+
+Finite.Render(JustText, document.body);
+```
 
 ## Simple counter example
 
