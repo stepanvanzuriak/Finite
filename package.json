@@ -2,21 +2,38 @@
   "name": "finite",
   "license": "MIT",
   "version": "0.1",
+  "author": "Stepan Vanzuriak <stepanvanzuriak@gmail.com>",
+  "main": "./dist/finite.js",
+  "homepage": "https://github.com/stepanvanzuriak/Finite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stepanvanzuriak/Finite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stepanvanzuriak/Finite/issues"
+  },
+  "keywords": [
+    "javascript",
+    "state-machine",
+    "micro-framework"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "rimraf": "^2.6.2",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^2.9.2"
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
-    "global": "^4.3.2",
-    "jest": "^23.4.1",
+    "immutable": "^3.8.2",
     "lit-html": "^0.10.2",
     "parcel": "^1.9.4"
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",
     "build": "parcel build src/index.ts --out-file finite.js",
+    "clean": "rimraf dist",
+    "prepublish": "npm run clean && npm run build",
     "example:playground": "parcel serve example/index.html"
   }
 }
