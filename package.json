@@ -19,15 +19,15 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "parcel": "^1.9.7",
     "rimraf": "^2.6.2",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
     "immutable": "^3.8.2",
-    "lit-html": "^0.10.2",
-    "parcel": "^1.9.4"
+    "lit-html": "^0.10.2"
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",
