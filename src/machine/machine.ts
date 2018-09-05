@@ -11,6 +11,8 @@ export class Machine {
 
   public pointer: State;
 
+  // TODO: public table: any
+
   constructor() {
     this.states = [];
     this.point = null;
@@ -23,6 +25,7 @@ export class Machine {
    */
   public add(state: State) {
     this.states.push(state);
+    // TODO: Build table with states and transitions
   }
 
   /**

@@ -22,9 +22,9 @@ const A = Finite.State({
     Finite.Transition("TO_B");
   },
   view: ({ data, getImage }) => h`
-                    <div>${data}</div>
-                    <button on-click=${getImage}>Send!</button>
-                    `
+                      <div>${data}</div>
+                      <button on-click=${getImage}>Send!</button>
+                      `
 });
 
 const B = Finite.State({

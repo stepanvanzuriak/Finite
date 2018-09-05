@@ -18,6 +18,7 @@ export interface IStateType {
 declare global {
   interface Window {
     h: any;
+    html: any;
     Finite: any;
     State: any;
     Render: any;

@@ -1,5 +1,7 @@
+import { mergeDeep, updateIn } from "immutable";
 import { render } from "lit-html";
-
+import cloneDeep from "lodash.clonedeep";
+import { loopNestedObj } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
 import { IStateType } from "../types";
@@ -36,14 +38,9 @@ export class Finite {
     return state;
   }
 
-  /**
-   * Transit state
-   * @param name Name of transiton
-   * @param payload Extra memory to send
-   */
-  public static Transition(name: string, payload = {}) {
+  // Warning: Experimental
+  public static __AsyncTransition(name: string, payload = {}) {
     const state = machine.pointer;
-    console.log(state);
     const nextStateName = state.transitions.find(
       transition => transition.name === name
     ).to;
@@ -56,13 +53,67 @@ export class Finite {
       `${state.name} -> ${nextStateName}`,
       state.memory,
       "-> ",
-      {
-        ...nextState.memory,
-        ...payload
+      mergeDeep(nextState.memory, payload)
+    );
+    console.log(payload);
+
+    let payloadCopy = cloneDeep(payload);
+    const promisesKeys = [];
+
+    loopNestedObj(payload, (key, value, savedKeys) => {
+      if (value instanceof Promise) {
+        promisesKeys.push([
+          value,
+          savedKeys === "" ? [key] : savedKeys.split(".")
+        ]);
       }
+    });
+
+    Promise.all(
+      promisesKeys.reduce((acc, container) => [...acc, container[0]], [])
+    ).then(res => {
+      res.map((r, index) => {
+        payloadCopy = updateIn(payloadCopy, promisesKeys[index][1], () => r);
+      });
+
+      console.log(payloadCopy);
+
+      nextState.memory = mergeDeep(nextState.memory, payloadCopy);
+      machine.pointer = nextState;
+
+      render(
+        nextState.view({
+          ...nextState.memory,
+          ...nextState.restWithMemory()
+        }),
+        machine.getMountPoint()
+      );
+    });
+  }
+
+  /**
+   * Transit state
+   * @param name Name of transiton
+   * @param payload Extra memory to send
+   */
+  public static Transition(name: string, payload = {}) {
+    const state = machine.pointer;
+    const nextStateName = state.transitions.find(
+      transition => transition.name === name
+    ).to;
+    const nextState = machine.find(nextStateName);
+
+    console.log(
+      "%cTRANSITION",
+      "color: green; font-weight: bold",
+      name,
+      `${state.name} -> ${nextStateName}`,
+      state.memory,
+      "-> ",
+      mergeDeep(nextState.memory, payload)
     );
 
-    nextState.memory = { ...nextState.memory, ...payload };
+    nextState.memory = mergeDeep(nextState.memory, payload);
 
     machine.pointer = nextState;
 

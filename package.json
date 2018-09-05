@@ -1,7 +1,7 @@
 {
   "name": "@stepanvanzuriak/finite",
   "license": "MIT",
-  "version": "0.0.1-hotfix",
+  "version": "0.0.2",
   "author": "Stepan Vanzuriak <stepanvanzuriak@gmail.com>",
   "main": "./dist/finite.js",
   "homepage": "https://github.com/stepanvanzuriak/Finite",
@@ -15,7 +15,8 @@
   "keywords": [
     "javascript",
     "state-machine",
-    "micro-framework"
+    "micro-framework",
+    "typescript"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -26,8 +27,9 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "immutable": "^3.8.2",
-    "lit-html": "^0.10.2"
+    "immutable": "4.0.0-rc.9",
+    "lit-html": "^0.10.2",
+    "lodash.clonedeep": "^4.5.0"
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",
