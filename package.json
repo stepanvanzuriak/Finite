@@ -1,7 +1,7 @@
 {
   "name": "@stepanvanzuriak/finite",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Stepan Vanzuriak <stepanvanzuriak@gmail.com>",
   "main": "./dist/finite.js",
   "homepage": "https://github.com/stepanvanzuriak/Finite",
