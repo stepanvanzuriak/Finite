@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/FBHIiem.png" width="80%"/>
 </p>
 
-## How to try ?
+## Install and Usage
 
 Install finite using your package manager
 
@@ -79,9 +79,9 @@ Finite.Render(A, document.body);
 
 ## Finite Namespace
 
-### Types
+### Typings
 
-`TemplateResult` from ['lit-html'](https://github.com/Polymer/lit-html)
+`TemplateResult` from [lit-html](https://github.com/Polymer/lit-html)
 
 ```typescript
 type ViewFunction = (props: object) => TemplateResult;
