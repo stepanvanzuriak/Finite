@@ -1,6 +1,6 @@
-import { mergeDeep, updateIn } from "immutable";
+import { updateIn } from "immutable";
 import { render } from "lit-html";
-import { loopNestedObj } from "../common/utils";
+import { loopNestedObj, mergeDeep } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
 import { IStateType } from "../types";
@@ -37,11 +37,14 @@ export class Finite {
     return state;
   }
 
+  /**
+   * Transit state when all data from payload loaded
+   * @param name Name of transiton
+   * @param payload Extra memory to send
+   */
   public static AsyncTransition(name: string, payload = {}) {
     const state = machine.pointer;
-    const nextStateName = state.transitions.find(
-      transition => transition.name === name
-    ).to;
+    const nextStateName = state.findByName(name).to;
     const nextState = machine.find(nextStateName);
 
     const promisesKeys = [];
@@ -91,9 +94,7 @@ export class Finite {
    */
   public static Transition(name: string, payload = {}) {
     const state = machine.pointer;
-    const nextStateName = state.transitions.find(
-      transition => transition.name === name
-    ).to;
+    const nextStateName = state.findByName(name).to;
     const nextState = machine.find(nextStateName);
 
     nextState.memory = mergeDeep(nextState.memory, payload);

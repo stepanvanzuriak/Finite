@@ -22,6 +22,10 @@ export class State {
     this.rest = rest;
   }
 
+  public findByName(name) {
+    return this.transitions.find(transition => transition.name === name);
+  }
+
   public restWithMemory() {
     return Object.keys(this.rest).reduce(
       (acc, key) => ({
