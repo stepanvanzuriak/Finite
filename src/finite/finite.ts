@@ -66,7 +66,7 @@ export class Finite {
       });
 
       nextState.memory = merge(nextState.memory, payload, {
-        arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+        arrayMerge: (_, sourceArray) => sourceArray
       });
 
       machine.pointer = nextState;
@@ -99,7 +99,7 @@ export class Finite {
     const nextState = machine.find(nextStateName);
 
     nextState.memory = merge(nextState.memory, payload, {
-      arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+      arrayMerge: (_, sourceArray) => sourceArray
     });
 
     machine.pointer = nextState;
