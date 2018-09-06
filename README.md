@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/code.png" width="80%"/>
+  <img src="https://i.imgur.com/FBHIiem.png" width="80%"/>
 </p>
 
 ## How to try ?
@@ -13,7 +13,7 @@ $ npm install @stepanvanzuriak/finite
 And just use!
 
 ```javascript
-import Finite, {State, h} from '@stepanvanzuriak/finite'
+import Finite, { State, h } from "@stepanvanzuriak/finite";
 
 const JustText = State({
   view: () => h`<p>Hello!</p>`
@@ -124,6 +124,19 @@ Finite.Transition(
 ```
 
 Change current state to another, `name` is name from state transitions and `payload` is extra data to send
+
+### AsyncTransition
+
+```typescript
+Finite.Transition(
+  name : String,
+  [payload] : Object
+)
+```
+
+Instead of normal `Transition` you can set data in payload as `Promise` and `Finite` will change state only when data become fetched.
+
+See `async.js` in `example` folder
 
 ### Render
 

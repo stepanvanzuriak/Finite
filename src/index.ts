@@ -8,11 +8,13 @@ window.Finite = Finite;
 window.State = Finite.State;
 window.Render = Finite.Render;
 window.Transition = Finite.Transition;
+window.AsyncTransition = Finite.AsyncTransition;
 window.T = Finite.T;
 
 export const State = Finite.State;
 export const Render = Finite.Render;
 export const Transition = Finite.Transition;
+export const AsyncTransition = Finite.AsyncTransition;
 export const T = Finite.T;
 export { html };
 export { html as h };

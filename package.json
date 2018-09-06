@@ -28,8 +28,7 @@
   },
   "dependencies": {
     "immutable": "4.0.0-rc.9",
-    "lit-html": "^0.10.2",
-    "lodash.clonedeep": "^4.5.0"
+    "lit-html": "^0.10.2"
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",

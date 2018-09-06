@@ -23,6 +23,7 @@ declare global {
     State: any;
     Render: any;
     Transition: any;
+    AsyncTransition: any;
     T: any;
   }
 }

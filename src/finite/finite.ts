@@ -1,6 +1,5 @@
 import { mergeDeep, updateIn } from "immutable";
 import { render } from "lit-html";
-import cloneDeep from "lodash.clonedeep";
 import { loopNestedObj } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
@@ -38,26 +37,13 @@ export class Finite {
     return state;
   }
 
-  // Warning: Experimental
-  public static __AsyncTransition(name: string, payload = {}) {
+  public static AsyncTransition(name: string, payload = {}) {
     const state = machine.pointer;
     const nextStateName = state.transitions.find(
       transition => transition.name === name
     ).to;
     const nextState = machine.find(nextStateName);
 
-    console.log(
-      "%cTRANSITION",
-      "color: green; font-weight: bold",
-      name,
-      `${state.name} -> ${nextStateName}`,
-      state.memory,
-      "-> ",
-      mergeDeep(nextState.memory, payload)
-    );
-    console.log(payload);
-
-    let payloadCopy = cloneDeep(payload);
     const promisesKeys = [];
 
     loopNestedObj(payload, (key, value, savedKeys) => {
@@ -73,13 +59,20 @@ export class Finite {
       promisesKeys.reduce((acc, container) => [...acc, container[0]], [])
     ).then(res => {
       res.map((r, index) => {
-        payloadCopy = updateIn(payloadCopy, promisesKeys[index][1], () => r);
+        payload = updateIn(payload, promisesKeys[index][1], () => r);
       });
 
-      console.log(payloadCopy);
-
-      nextState.memory = mergeDeep(nextState.memory, payloadCopy);
+      nextState.memory = mergeDeep(nextState.memory, payload);
       machine.pointer = nextState;
+
+      console.log(
+        "%cASYNC TRANSITION",
+        "color: green; font-weight: bold",
+        name,
+        `${state.name} -> ${nextStateName}`,
+        "OLD MEMORY -> ",
+        nextState.memory
+      );
 
       render(
         nextState.view({
@@ -103,6 +96,10 @@ export class Finite {
     ).to;
     const nextState = machine.find(nextStateName);
 
+    nextState.memory = mergeDeep(nextState.memory, payload);
+
+    machine.pointer = nextState;
+
     console.log(
       "%cTRANSITION",
       "color: green; font-weight: bold",
@@ -110,12 +107,8 @@ export class Finite {
       `${state.name} -> ${nextStateName}`,
       state.memory,
       "-> ",
-      mergeDeep(nextState.memory, payload)
+      nextState.memory
     );
-
-    nextState.memory = mergeDeep(nextState.memory, payload);
-
-    machine.pointer = nextState;
 
     render(
       nextState.view({
