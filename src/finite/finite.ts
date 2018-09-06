@@ -1,6 +1,8 @@
+import merge from "deepmerge";
 import { updateIn } from "immutable";
 import { render } from "lit-html";
-import { loopNestedObj, mergeDeep } from "../common/utils";
+
+import { loopNestedObj } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
 import { IStateType } from "../types";
@@ -8,9 +10,8 @@ import { IStateType } from "../types";
 const machine = new Machine();
 
 console.log(
-  "🚧 Right now console output only way to debug this, so every Transition is logged 🚧"
+  "🚧 Right now console output only way to debug this, so every Transition is logged 🚧\n"
 );
-console.log("");
 /**
  * Main framework object
  */
@@ -46,7 +47,6 @@ export class Finite {
     const state = machine.pointer;
     const nextStateName = state.findByName(name).to;
     const nextState = machine.find(nextStateName);
-
     const promisesKeys = [];
 
     loopNestedObj(payload, (key, value, savedKeys) => {
@@ -65,16 +65,17 @@ export class Finite {
         payload = updateIn(payload, promisesKeys[index][1], () => r);
       });
 
-      nextState.memory = mergeDeep(nextState.memory, payload);
+      nextState.memory = merge(nextState.memory, payload, {
+        arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+      });
+
       machine.pointer = nextState;
 
       console.log(
         "%cASYNC TRANSITION",
         "color: green; font-weight: bold",
         name,
-        `${state.name} -> ${nextStateName}`,
-        "OLD MEMORY -> ",
-        nextState.memory
+        `${state.name} -> ${nextStateName}`
       );
 
       render(
@@ -97,7 +98,9 @@ export class Finite {
     const nextStateName = state.findByName(name).to;
     const nextState = machine.find(nextStateName);
 
-    nextState.memory = mergeDeep(nextState.memory, payload);
+    nextState.memory = merge(nextState.memory, payload, {
+      arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+    });
 
     machine.pointer = nextState;
 
@@ -105,10 +108,7 @@ export class Finite {
       "%cTRANSITION",
       "color: green; font-weight: bold",
       name,
-      `${state.name} -> ${nextStateName}`,
-      state.memory,
-      "-> ",
-      nextState.memory
+      `${state.name} -> ${nextStateName}`
     );
 
     render(

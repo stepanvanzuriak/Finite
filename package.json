@@ -27,6 +27,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
+    "deepmerge": "^2.1.1",
     "immutable": "4.0.0-rc.9",
     "lit-html": "^0.10.2"
   },
