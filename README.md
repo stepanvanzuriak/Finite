@@ -2,7 +2,17 @@
   <img src="https://i.imgur.com/FBHIiem.png" width="80%"/>
 </p>
 
-## Install and Usage
+## 🤔 Why?
+
+User interfaces can be expressed by two things:
+
+1. The state of the UI
+2. Actions that can change that state
+
+Add we can connect this two points with Finite-state machine.
+This simple micro framework use State as main part of web page.
+
+## 💻 Install and Usage
 
 Install finite using your package manager
 
@@ -75,30 +85,7 @@ Finite.Render(A, document.body);
 
 ##### More examples in `example` folder
 
-## Api
-
-## Finite Namespace
-
-### Typings
-
-`TemplateResult` from [lit-html](https://github.com/Polymer/lit-html)
-
-```typescript
-type ViewFunction = (props: object) => TemplateResult;
-
-interface ITransition {
-  name: string;
-  to: string;
-}
-
-interface IStateType {
-  view: ViewFunction;
-  name: string;
-  memory: object;
-  transitions: ITransition[];
-  rest: object;
-}
-```
+## 📖 Api
 
 ### State
 
@@ -158,6 +145,27 @@ Finite.T(
 ) -> {name, to}
 ```
 
-#  Contribute
+## 🖊️ Typings
+
+`TemplateResult` from [lit-html](https://github.com/Polymer/lit-html)
+
+```typescript
+type ViewFunction = (props: object) => TemplateResult;
+
+interface ITransition {
+  name: string;
+  to: string;
+}
+
+interface IStateType {
+  view: ViewFunction;
+  name: string;
+  memory: object;
+  transitions: ITransition[];
+  rest: object;
+}
+```
+
+# 💁 Contribute
 
 If you want to contribute to this project, please see our [Contributing Guide](/CONTRIBUTING.md) !
