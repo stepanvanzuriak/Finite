@@ -157,3 +157,7 @@ Finite.T(
   to: String
 ) -> {name, to}
 ```
+
+#  Contribute
+
+If you want to contribute to this project, please see our [Contributing Guide](/CONTRIBUTING.md) !
