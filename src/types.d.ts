@@ -17,13 +17,13 @@ export interface IStateType {
 
 declare global {
   interface Window {
-    h: any;
-    html: any;
+    h: Function;
+    html: Function;
     Finite: any;
-    State: any;
-    Render: any;
-    Transition: any;
-    AsyncTransition: any;
-    T: any;
+    State: Function;
+    Render: Function;
+    Transition: Function;
+    AsyncTransition: Function;
+    T: Function;
   }
 }
