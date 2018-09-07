@@ -55,7 +55,7 @@ const Counter = Finite.State({
 Finite.Render(Counter, document.body);
 ```
 
-## Simple two state example
+## Two state example
 
 ```javascript
 const A = Finite.State({
