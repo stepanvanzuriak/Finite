@@ -1,8 +1,7 @@
-import merge from "deepmerge";
 import { updateIn } from "immutable";
 import { render } from "lit-html";
 
-import { loopNestedObj } from "../common/utils";
+import { loopNestedObj, merge } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
 import { IStateType } from "../types";
@@ -49,12 +48,9 @@ export class Finite {
     const nextState = machine.find(nextStateName);
     const promisesKeys = [];
 
-    loopNestedObj(payload, (key, value, savedKeys) => {
+    loopNestedObj(payload, (value, savedKeys) => {
       if (value instanceof Promise) {
-        promisesKeys.push([
-          value,
-          savedKeys === "" ? [key] : savedKeys.split(".")
-        ]);
+        promisesKeys.push([value, savedKeys]);
       }
     });
 
@@ -65,9 +61,7 @@ export class Finite {
         payload = updateIn(payload, promisesKeys[index][1], () => r);
       });
 
-      nextState.memory = merge(nextState.memory, payload, {
-        arrayMerge: (_, sourceArray) => sourceArray
-      });
+      nextState.memory = merge(nextState.memory, payload);
 
       machine.pointer = nextState;
 
@@ -98,9 +92,7 @@ export class Finite {
     const nextStateName = state.findByName(name).to;
     const nextState = machine.find(nextStateName);
 
-    nextState.memory = merge(nextState.memory, payload, {
-      arrayMerge: (_, sourceArray) => sourceArray
-    });
+    nextState.memory = merge(nextState.memory, payload);
 
     machine.pointer = nextState;
 

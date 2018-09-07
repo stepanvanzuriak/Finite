@@ -6,12 +6,13 @@ import { State } from "../state/state";
 export class Machine {
   // Array of states
   public states: State[];
+
   // Main mount point
   public point: HTMLElement;
 
   public pointer: State;
 
-  // TODO: public table: any
+  public table: any;
 
   constructor() {
     this.states = [];
