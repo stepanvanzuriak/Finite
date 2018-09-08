@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "deepmerge": "^2.1.1",
-    "immutable": "4.0.0-rc.9",
-    "lit-html": "^0.10.2"
+    "lit-html": "^0.10.2",
+    "updatein": "^1.0.1"
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",

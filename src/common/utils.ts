@@ -1,4 +1,4 @@
-import { default as deepmerge } from "deepmerge";
+import deepmerge from "deepmerge";
 
 export const inject = (f, i) => args => f(args, i);
 

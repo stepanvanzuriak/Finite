@@ -1,5 +1,5 @@
-import { updateIn } from "immutable";
 import { render } from "lit-html";
+import { updateIn } from "updatein";
 
 import { loopNestedObj, merge } from "../common/utils";
 import { Machine } from "../machine/machine";
@@ -9,7 +9,7 @@ import { IStateType } from "../types";
 const machine = new Machine();
 
 console.log(
-  "🚧 Right now console output only way to debug this, so every Transition is logged 🚧\n"
+  "Right now console output only way to debug this, so every Transition is logged \n"
 );
 /**
  * Main framework object
@@ -44,7 +44,7 @@ export class Finite {
    */
   public static AsyncTransition(name: string, payload = {}) {
     const state = machine.pointer;
-    const nextStateName = state.findByName(name).to;
+    const nextStateName = state.findTransitionsByName(name).to;
     const nextState = machine.find(nextStateName);
     const promisesKeys = [];
 
@@ -66,8 +66,7 @@ export class Finite {
       machine.pointer = nextState;
 
       console.log(
-        "%cASYNC TRANSITION",
-        "color: green; font-weight: bold",
+        "ASYNC TRANSITION",
         name,
         `${state.name} -> ${nextStateName}`
       );
@@ -89,19 +88,14 @@ export class Finite {
    */
   public static Transition(name: string, payload = {}) {
     const state = machine.pointer;
-    const nextStateName = state.findByName(name).to;
+    const nextStateName = state.findTransitionsByName(name).to;
     const nextState = machine.find(nextStateName);
 
     nextState.memory = merge(nextState.memory, payload);
 
     machine.pointer = nextState;
 
-    console.log(
-      "%cTRANSITION",
-      "color: green; font-weight: bold",
-      name,
-      `${state.name} -> ${nextStateName}`
-    );
+    console.log("TRANSITION", name, `${state.name} -> ${nextStateName}`);
 
     render(
       nextState.view({
@@ -121,12 +115,7 @@ export class Finite {
     machine.setMountPoint(point);
     machine.pointer = state;
 
-    console.log(
-      "%cINIT_STATE",
-      "color: blue; font-weight: bold",
-      state.name || "Anonymous",
-      state.memory
-    );
+    console.log("INIT_STATE", state.name || "Anonymous", state.memory);
 
     render(
       state.view({

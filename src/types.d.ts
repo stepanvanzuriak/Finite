@@ -1,4 +1,4 @@
-import { TemplateResult } from "../node_modules/lit-html";
+import { TemplateResult } from "lit-html";
 
 export type ViewFunction = (props: object) => TemplateResult;
 

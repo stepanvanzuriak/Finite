@@ -22,7 +22,7 @@ export class State {
     this.rest = rest;
   }
 
-  public findByName(name) {
+  public findTransitionsByName(name) {
     return this.transitions.find(transition => transition.name === name);
   }
 
