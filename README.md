@@ -87,7 +87,7 @@ Finite.Render(A, document.body);
 
 ## 📝 TODO
 
-- [ ] Write own html template (instead of lit-html) to reduce bundle size
+- [ ] Write own html template (instead of lit-html) to reduce bundle size. See [picohtml](https://github.com/stepanvanzuriak/picohtml)
 - [ ] Create Finite.State version as ES6 class
 - [ ] Rething AsyncTransition (Promise rejection)
 - [ ] Move examples to [CodeSandbox](https://codesandbox.io/)
