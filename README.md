@@ -85,6 +85,14 @@ Finite.Render(A, document.body);
 
 ##### More examples in `example` folder
 
+## 📝 TODO
+
+- [ ] Write own html template (instead of lit-html) to reduce bundle size
+- [ ] Create Finite.State version as ES6 class
+- [ ] Rething AsyncTransition (Promise rejection)
+- [ ] Move examples to [CodeSandbox](https://codesandbox.io/)
+
+
 ## 📖 Api
 
 ### State
