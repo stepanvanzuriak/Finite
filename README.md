@@ -9,7 +9,7 @@ User interfaces can be expressed by two things:
 1. The state of the UI
 2. Actions that can change that state
 
-Add we can connect this two points with Finite-state machine.
+And we can connect this two points with Finite-state machine.
 This simple micro framework use State as main part of web page.
 
 ## 💻 Install and Usage
