@@ -21,7 +21,11 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
+    "http-server": "^0.11.1",
+    "husky": "^1.1.0",
+    "jest": "^23.6.0",
     "parcel": "^1.9.7",
+    "puppeteer": "^1.8.0",
     "rimraf": "^2.6.2",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^2.9.2"
@@ -33,9 +37,18 @@
   },
   "scripts": {
     "dev": "parcel watch src/index.ts --out-file finite.js",
+    "jest": "jest",
+    "test": "npm run clean:test && npm run build:test && jest",
+    "build:test": "parcel build src/index.ts --out-dir test --out-file finite.js --no-source-maps",
     "build": "parcel build src/index.ts --out-file finite.js",
     "clean": "rimraf dist",
-    "prepublish": "npm run clean && npm run build",
-    "example:playground": "parcel serve example/index.html"
+    "clean:test": "rimraf test/finite.js",
+    "example:playground": "parcel serve example/index.html",
+    "prepublish": "npm run test && npm run clean && npm run build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test"
+    }
   }
 }
