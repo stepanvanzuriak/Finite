@@ -1,7 +1,3 @@
-import { TemplateResult } from "lit-html";
-
-export type ViewFunction = (props: object) => TemplateResult;
-
 export interface ITransition {
   name: string;
   to: string;
@@ -9,7 +5,7 @@ export interface ITransition {
 
 export interface IStateType {
   name: string;
-  view: ViewFunction;
+  view: any;
   memory: object;
   transitions: ITransition[];
   rest: object;
@@ -25,5 +21,6 @@ declare global {
     Transition: Function;
     AsyncTransition: Function;
     T: Function;
+    raw: Function;
   }
 }

@@ -3,8 +3,7 @@
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "jsRules": {},
   "rules": {
-    "trailing-comma": false,
-    "no-console": false
+    "trailing-comma": false
   },
   "rulesDirectory": []
 }

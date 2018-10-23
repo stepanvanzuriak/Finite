@@ -4,12 +4,9 @@ export const inject = (f, i) => args => f(args, i);
 
 export const loopNestedObj = (obj, callback, savedKeys = []) => {
   Object.entries(obj).forEach(([key, val]) => {
+    savedKeys.push(key);
     if (val && typeof val === "object" && !(val instanceof Promise)) {
-      loopNestedObj(
-        val,
-        callback,
-        savedKeys.length ? [key] : [...savedKeys, key]
-      );
+      loopNestedObj(val, callback, savedKeys);
     } else {
       callback(val, savedKeys);
     }

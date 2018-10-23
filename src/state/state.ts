@@ -1,10 +1,10 @@
 import { inject } from "../common/utils";
-import { IStateType, ITransition, ViewFunction } from "../types";
+import { IStateType, ITransition } from "../types";
 
 export class State {
   public name: string;
   public memory: object;
-  public view: ViewFunction;
+  public view: any;
   public transitions: ITransition[];
   public rest: object;
 

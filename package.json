@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "deepmerge": "^2.1.1",
-    "lit-html": "^0.10.2",
+    "picohtml": "^0.1.2",
     "updatein": "^1.0.1"
   },
   "scripts": {

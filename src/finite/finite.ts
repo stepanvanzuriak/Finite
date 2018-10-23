@@ -1,5 +1,5 @@
-import { render } from "lit-html";
-import { updateIn } from "updatein";
+import { render } from "picohtml";
+import updateIn from "updatein";
 
 import { loopNestedObj, merge } from "../common/utils";
 import { Machine } from "../machine/machine";
@@ -9,7 +9,7 @@ import { IStateType } from "../types";
 const machine = new Machine();
 
 console.log(
-  "Right now console output only way to debug this, so every Transition is logged \n"
+  "Right now console output only way to debug, so every Transition is logged \n"
 );
 /**
  * Main framework object
@@ -46,7 +46,7 @@ export class Finite {
     const state = machine.pointer;
     const nextStateName = state.findTransitionsByName(name).to;
     const nextState = machine.find(nextStateName);
-    const promisesKeys = [];
+    let promisesKeys = [];
 
     loopNestedObj(payload, (value, savedKeys) => {
       if (value instanceof Promise) {
@@ -58,7 +58,7 @@ export class Finite {
       promisesKeys.reduce((acc, container) => [...acc, container[0]], [])
     ).then(res => {
       res.map((r, index) => {
-        payload = updateIn(payload, promisesKeys[index][1], () => r);
+        payload = updateIn(payload, promisesKeys[index][1], r);
       });
 
       nextState.memory = merge(nextState.memory, payload);
@@ -68,14 +68,12 @@ export class Finite {
       console.log(
         "ASYNC TRANSITION",
         name,
-        `${state.name} -> ${nextStateName}`
+        `${state.name} -> ${nextStateName}`,
+        nextState.memory
       );
 
       render(
-        nextState.view({
-          ...nextState.memory,
-          ...nextState.restWithMemory()
-        }),
+        nextState.view(merge(nextState.memory, nextState.restWithMemory())),
         machine.getMountPoint()
       );
     });
@@ -96,12 +94,17 @@ export class Finite {
     machine.pointer = nextState;
 
     console.log("TRANSITION", name, `${state.name} -> ${nextStateName}`);
+    console.log(
+      nextState.view(merge(nextState.memory, nextState.restWithMemory()))
+    );
+    console.log(
+      nextState
+        .view(merge(nextState.memory, nextState.restWithMemory()))
+        .getResult()
+    );
 
     render(
-      nextState.view({
-        ...nextState.memory,
-        ...nextState.restWithMemory()
-      }),
+      nextState.view(merge(nextState.memory, nextState.restWithMemory())),
       machine.getMountPoint()
     );
   }
@@ -117,13 +120,7 @@ export class Finite {
 
     console.log("INIT_STATE", state.name || "Anonymous", state.memory);
 
-    render(
-      state.view({
-        ...state.memory,
-        ...state.restWithMemory()
-      }),
-      point
-    );
+    render(state.view(merge(state.memory, state.restWithMemory())), point);
   }
 
   public static T(name: string, to: string) {

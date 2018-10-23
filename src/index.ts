@@ -1,9 +1,9 @@
 // tslint:disable-next-line:no-submodule-imports
-import { html } from "lit-html/lib/lit-extended";
+import { html, raw } from "picohtml";
 import { Finite } from "./finite/finite";
 
 window.h = html;
-window.html = html;
+window.raw = raw;
 window.Finite = Finite;
 window.State = Finite.State;
 window.Render = Finite.Render;
@@ -16,7 +16,7 @@ export const Render = Finite.Render;
 export const Transition = Finite.Transition;
 export const AsyncTransition = Finite.AsyncTransition;
 export const T = Finite.T;
-export { html };
 export { html as h };
+export { raw };
 
 export default Finite;

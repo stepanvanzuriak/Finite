@@ -1,13 +1,15 @@
 import { State, Transition, T, h, Render } from "../dist/finite";
 
 const view = ({ list, inputValue, onChange, addValue, removeValue }) => h`
-  <input on-change=${onChange} value=${inputValue} type="text"/>
-  <button on-click=${addValue}>Add</button>
-  ${list.map(
-    (element, index) =>
-      h`<p>${element}  <button on-click=${() =>
-        removeValue(index)}>X</button></p>`
-  )}
+  <div class="app">
+    <input onchange=${onChange} value=${inputValue} type="text"/>
+    <button onclick=${addValue}>Add</button>
+    ${list.map(
+      (element, index) =>
+        h`<p>${element}<button onclick=${() =>
+          removeValue(index)}>X</button></p>`
+    )}
+  </div>
   `;
 
 const ToDo = State({
@@ -39,4 +41,4 @@ const ToDo = State({
   view
 });
 
-Render(ToDo, document.body);
+Render(ToDo, document.querySelector("#root"));

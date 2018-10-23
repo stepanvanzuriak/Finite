@@ -45,11 +45,13 @@ const Counter = Finite.State({
   increment: (_, { count }) =>
     Finite.Transition("INCREMENT", { count: count + 1 }),
   decrement: (_, { count }) =>
-    Finite.Transition("DECREMENT", { count: count - 1 }),
+    Finite.Transition("INCREMENT", { count: count - 1 }),
   view: ({ count, increment, decrement }) =>
-    h`<button on-click=${decrement}>-1</button>
+    h`<div class="app">
+        <button onclick=${decrement}>-1</button>
         <div>${count}</div>
-        <button on-click=${increment}>+1</button>`
+        <button onclick=${increment}>+1</button>
+      </div>`
 });
 
 Finite.Render(Counter, document.body);
@@ -66,7 +68,9 @@ const A = Finite.State({
   transitions: [Finite.T("MOVE_TO_B", "B")],
   onClick: e => Finite.Transition("MOVE_TO_B"),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To B</button>`
+    h`<div class="app">
+        <div>${text}</div><button onclick=${onClick}>To B</button>
+      </div>`
 });
 
 const B = Finite.State({
@@ -77,7 +81,9 @@ const B = Finite.State({
   transitions: [Finite.T("MOVE_TO_A", "A")],
   onClick: e => Finite.Transition("MOVE_TO_A", { text: "New Text A" }),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To A</button>`
+    h`<div class="app">
+        <div>${text}</div><button onclick=${onClick}>To A</button>
+      </div>`
 });
 
 Finite.Render(A, document.body);
@@ -91,7 +97,6 @@ Finite.Render(A, document.body);
 - [ ] Create Finite.State version as ES6 class
 - [ ] Rething AsyncTransition (Promise rejection)
 - [ ] Move examples to [CodeSandbox](https://codesandbox.io/)
-
 
 ## 📖 Api
 
@@ -155,18 +160,14 @@ Finite.T(
 
 ## 🖊️ Typings
 
-`TemplateResult` from [lit-html](https://github.com/Polymer/lit-html)
-
 ```typescript
-type ViewFunction = (props: object) => TemplateResult;
-
 interface ITransition {
   name: string;
   to: string;
 }
 
 interface IStateType {
-  view: ViewFunction;
+  view: any;
   name: string;
   memory: object;
   transitions: ITransition[];

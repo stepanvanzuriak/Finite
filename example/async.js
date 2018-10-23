@@ -1,7 +1,6 @@
-// Just playground file
 const A = Finite.State({
   name: "A",
-  memory: { data: "NO_DATA" },
+  memory: { data: {} },
   transitions: [Finite.T("GET_DATA", "A"), Finite.T("TO_B", "B")],
   getImage: () => {
     Finite.AsyncTransition("GET_DATA", {
@@ -11,9 +10,11 @@ const A = Finite.State({
     });
     Finite.Transition("TO_B");
   },
-  view: ({ data: { title = "Empty" }, getImage }) => h`
-                      <div>${title}</div>
-                      <button on-click=${getImage}>Send!</button>
+  view: ({ data: { title = "EMPTY" }, getImage }) => h`
+                      <div class="app">
+                        <div>${title}</div>
+                        <button onclick=${getImage}>Send!</button>
+                      </div>
                       `
 });
 
@@ -22,4 +23,4 @@ const B = Finite.State({
   view: () => h`<p>Loading...</p>`
 });
 
-Finite.Render(A, document.body);
+Finite.Render(A, document.querySelector("#root"));

@@ -6,7 +6,9 @@ const A = Finite.State({
   transitions: [Finite.T("MOVE_TO_B", "B")],
   onClick: e => Finite.Transition("MOVE_TO_B"),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To B</button>`
+    h`<div class="app">
+        <div>${text}</div><button onclick=${onClick}>To B</button>
+      </div>`
 });
 
 const B = Finite.State({
@@ -17,7 +19,9 @@ const B = Finite.State({
   transitions: [Finite.T("MOVE_TO_A", "A")],
   onClick: e => Finite.Transition("MOVE_TO_A", { text: "New Text A" }),
   view: ({ text, onClick }) =>
-    h`<div>${text}</div><button on-click={${onClick}}>To A</button>`
+    h`<div class="app">
+        <div>${text}</div><button onclick=${onClick}>To A</button>
+      </div>`
 });
 
 Finite.Render(A, document.body);
