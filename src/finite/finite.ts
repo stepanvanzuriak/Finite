@@ -1,16 +1,13 @@
 import { render } from "picohtml";
 import updateIn from "updatein";
 
-import { loopNestedObj, merge } from "../common/utils";
+import { loopNestedObj, merge, log } from "../common/utils";
 import { Machine } from "../machine/machine";
 import { State } from "../state/state";
 import { IStateType } from "../types";
 
 const machine = new Machine();
 
-console.log(
-  "Right now console output only way to debug, so every Transition is logged \n"
-);
 /**
  * Main framework object
  */
@@ -46,7 +43,7 @@ export class Finite {
     const state = machine.pointer;
     const nextStateName = state.findTransitionsByName(name).to;
     const nextState = machine.find(nextStateName);
-    let promisesKeys = [];
+    const promisesKeys = [];
 
     loopNestedObj(payload, (value, savedKeys) => {
       if (value instanceof Promise) {
@@ -65,7 +62,7 @@ export class Finite {
 
       machine.pointer = nextState;
 
-      console.log(
+      log(
         "ASYNC TRANSITION",
         name,
         `${state.name} -> ${nextStateName}`,
@@ -93,14 +90,11 @@ export class Finite {
 
     machine.pointer = nextState;
 
-    console.log("TRANSITION", name, `${state.name} -> ${nextStateName}`);
-    console.log(
-      nextState.view(merge(nextState.memory, nextState.restWithMemory()))
-    );
-    console.log(
-      nextState
-        .view(merge(nextState.memory, nextState.restWithMemory()))
-        .getResult()
+    log(
+      "TRANSITION",
+      name,
+      `${state.name} -> ${nextStateName}`,
+      ` ${state.memory}->${nextState.memory}`
     );
 
     render(
@@ -118,7 +112,7 @@ export class Finite {
     machine.setMountPoint(point);
     machine.pointer = state;
 
-    console.log("INIT_STATE", state.name || "Anonymous", state.memory);
+    log("INIT_STATE", state.name || "Anonymous", state.memory);
 
     render(state.view(merge(state.memory, state.restWithMemory())), point);
   }

@@ -5,7 +5,7 @@ export interface ITransition {
 
 export interface IStateType {
   name: string;
-  view: any;
+  view: (...args) => any;
   memory: object;
   transitions: ITransition[];
   rest: object;

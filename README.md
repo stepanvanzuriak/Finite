@@ -95,8 +95,9 @@ Finite.Render(A, document.body);
 
 - [x] Write own html template (instead of lit-html) to reduce bundle size. See [picohtml](https://github.com/stepanvanzuriak/picohtml)
 - [ ] Create Finite.State version as ES6 class
-- [ ] Rething AsyncTransition (Promise rejection)
+- [ ] Rethink AsyncTransition (Promise rejection)
 - [ ] Move examples to [CodeSandbox](https://codesandbox.io/)
+- [ ] Better tests
 
 ## 📖 Api
 
@@ -167,7 +168,7 @@ interface ITransition {
 }
 
 interface IStateType {
-  view: any;
+  view: (...args) => any;
   name: string;
   memory: object;
   transitions: ITransition[];
