@@ -35,19 +35,14 @@
   },
   "dependencies": {},
   "scripts": {
-    "dev": "parcel watch src/index.ts --out-file finite.js --experimental-scope-hoisting",
+    "dev": "parcel watch src/index.ts --out-file finite.js",
     "jest": "jest",
     "test": "npm run clean:test && npm run build:test && jest",
     "build:test": "parcel build src/index.ts --out-dir test --out-file finite.js --no-source-maps --experimental-scope-hoisting",
     "build": "parcel build src/index.ts --out-file finite.js --experimental-scope-hoisting",
     "clean": "rimraf dist",
     "clean:test": "rimraf test/finite.js",
-    "example:playground": "parcel serve example/index.html",
+    "example:playground": "parcel serve playground/index.html",
     "prepublish": "npm run test && npm run clean && npm run build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run test"
-    }
   }
 }
