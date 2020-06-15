@@ -1,6 +1,7 @@
 /node_modules
 /.cache
 /dist
+/test/finite.js
 
 yarn-error.log
 test/finite.js
