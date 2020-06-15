@@ -1,6 +1,5 @@
-// tslint:disable-next-line:no-submodule-imports
-import { html, raw } from "picohtml";
-import { Finite } from "./finite/finite";
+import { html, raw } from 'picohtml';
+import { Finite } from './finite/finite';
 
 window.h = html;
 window.raw = raw;

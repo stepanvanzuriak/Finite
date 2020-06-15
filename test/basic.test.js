@@ -1,5 +1,12 @@
 const puppeteer = require('puppeteer');
 const httpServer = require('http-server');
+const fs = require('fs');
+const path = require('path');
+
+fs.copyFileSync(
+  path.resolve(__dirname, '../dist/finite.js'),
+  path.resolve(__dirname, './finite.js'),
+);
 
 let browser;
 let page;
@@ -17,7 +24,7 @@ afterAll(() => {
   browser.close();
 }, 20000);
 
-it('basic page', async () => {
+test('basic page', async () => {
   page = await browser.newPage();
   await page.goto('http://localhost:8080/test.html');
 
@@ -25,7 +32,7 @@ it('basic page', async () => {
   expect(html).toBe('Hello!');
 }, 20000);
 
-it('on click', async () => {
+test('on click', async () => {
   page = await browser.newPage();
   await page.goto('http://localhost:8080/onclick.html');
   await page.click('#inc');

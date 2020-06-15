@@ -1,9 +1,9 @@
-import { inject } from "../common/utils";
-import { IStateType, ITransition } from "../types";
+import { inject } from '../common/utils';
+import { IStateType, ITransition } from '../types';
 
 export class State {
   public name: string;
-  public memory: object;
+  public memory: Record<string, any>;
   public view: any;
   public transitions: ITransition[];
   public rest: object;
@@ -23,16 +23,16 @@ export class State {
   }
 
   public findTransitionsByName(name) {
-    return this.transitions.find(transition => transition.name === name);
+    return this.transitions.find((transition) => transition.name === name);
   }
 
   public restWithMemory() {
     return Object.keys(this.rest).reduce(
       (acc, key) => ({
         ...acc,
-        [key]: inject(this.rest[key], this.memory)
+        [key]: inject(this.rest[key], this.memory),
       }),
-      {}
+      {},
     );
   }
 }

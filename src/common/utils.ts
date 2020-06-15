@@ -1,6 +1,6 @@
-import deepmerge from "deepmerge";
+import * as deepmerge from 'deepmerge';
 
-export const inject = (f, i) => args => f(args, i);
+export const inject = (f, i) => (args) => f(args, i);
 
 export function log(...args) {
   console.log(args);
@@ -8,7 +8,7 @@ export function log(...args) {
 
 export const loopNestedObj = (obj, callback, savedKeys = []) => {
   Object.entries(obj).forEach(([key, val]) => {
-    if (val && typeof val === "object" && !(val instanceof Promise)) {
+    if (val && typeof val === 'object' && !(val instanceof Promise)) {
       loopNestedObj(val, callback, [...savedKeys, key]);
     } else {
       callback(val, [...savedKeys, key]);
@@ -18,5 +18,5 @@ export const loopNestedObj = (obj, callback, savedKeys = []) => {
 
 export const merge = (a, b) =>
   deepmerge(a, b, {
-    arrayMerge: (_, sourceArray) => sourceArray
+    arrayMerge: (_, sourceArray) => sourceArray,
   });
